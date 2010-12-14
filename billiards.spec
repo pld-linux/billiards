@@ -1,12 +1,12 @@
 Summary:	Free cue sports simulator
 Summary(pl.UTF-8):	Darmowy symulator bilarda
 Name:		billiards
-Version:	0.3
+Version:	0.4
 Release:	0.1
 License:	GPL v3+
 Group:		X11/Applications/Games
 Source0:	http://download.savannah.gnu.org/releases/billiards/%{name}-%{version}.tar.gz
-# Source0-md5:	11b1b3653de75be8434be98171e92081
+# Source0-md5:	6bcee44199f85a7b6710dc0e06f0db75
 URL:		http://www.nongnu.org/billiards/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -30,7 +30,8 @@ przyjaciółmi, gdy prawdziwy stół bilardowy nie jest dostępny.
 %prep
 %setup -q
 %{__sed} -i 's,techne/,,' src/Makefile.am
-%{__sed} -i 's,/techne,,' src/billiards.in
+%{__sed} -i 's,/techne,,;s,@techne@,%{_bindir}/techne.bin,' src/billiards.in
+%{__sed} -i 's,billiards/,%{_datadir}/billiards/,' src/billiards.lua
 
 %build
 %{__aclocal}
@@ -45,6 +46,9 @@ rm -rf $RPM_BUILD_ROOT
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT
 
+# remove symlink
+%{__rm} $RPM_BUILD_ROOT%{_mandir}/man6/billiards-browser.6
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -52,4 +56,6 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS ChangeLog NEWS README
 %attr(755,root,root) %{_bindir}/billiards
+%attr(755,root,root) %{_bindir}/billiards-browser
 %{_datadir}/%{name}
+%{_mandir}/man6/*.6*
