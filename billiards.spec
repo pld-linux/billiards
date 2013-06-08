@@ -1,12 +1,12 @@
 Summary:	Free cue sports simulator
 Summary(pl.UTF-8):	Darmowy symulator bilarda
 Name:		billiards
-Version:	0.4
+Version:	0.4.1
 Release:	0.1
 License:	GPL v3+
 Group:		X11/Applications/Games
 Source0:	http://download.savannah.gnu.org/releases/billiards/%{name}-%{version}.tar.gz
-# Source0-md5:	6bcee44199f85a7b6710dc0e06f0db75
+# Source0-md5:	c00786f1ca0cd62a276f6d6383a75249
 URL:		http://www.nongnu.org/billiards/
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -58,4 +58,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_bindir}/billiards
 %attr(755,root,root) %{_bindir}/billiards-browser
 %{_datadir}/%{name}
+%{_desktopdir}/billiards.desktop
+%{_iconsdir}/hicolor/48x48/apps/billiards.png
+%{_iconsdir}/hicolor/scalable/apps/billiards.svg
 %{_mandir}/man6/*.6*
